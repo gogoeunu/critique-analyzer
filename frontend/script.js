@@ -1,3 +1,5 @@
+import config from './config.js';
+
 function displayTags(tags) {
     if (!tags) {
         console.error('No tags provided to displayTags');
@@ -44,7 +46,7 @@ async function analyzeImage() {
 
     try {
         console.log('Sending image to backend...');
-        const response = await fetch('http://localhost:3001/analyze', {
+        const response = await fetch(`${config.backendUrl}/analyze`, {
             method: 'POST',
             body: formData
         });
