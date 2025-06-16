@@ -30,19 +30,28 @@ function displayTags(tags) {
     });
 }
 
-async function analyzeImage() {
+export async function analyzeImage() {
     const fileInput = document.getElementById('imageInput');
     const file = fileInput.files[0];
     const language = document.getElementById('language').value;
+    const critique = document.getElementById('critique').value;
+    const concept = document.getElementById('concept').value;
 
     if (!file) {
         alert('Please select an image file');
         return;
     }
 
+    if (!critique) {
+        alert('Please provide a critique');
+        return;
+    }
+
     const formData = new FormData();
     formData.append('image', file);
     formData.append('language', language);
+    formData.append('critique', critique);
+    formData.append('concept', concept);
 
     try {
         console.log('Sending image to backend...');

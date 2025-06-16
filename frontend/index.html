@@ -306,7 +306,7 @@
                 <img id="imagePreview" class="image-preview" style="display: none;">
             </div>
 
-            <button onclick="analyzeImage()">Analyze Architecture</button>
+            <button id="analyzeButton">Analyze Architecture</button>
         </div>
 
         <div class="panel">
@@ -337,6 +337,9 @@
         </div>
     </div>
 
-    <script src="script.js" type="module"></script>
+    <script type="module">
+        import { analyzeImage } from './script.js';
+        document.getElementById('analyzeButton').addEventListener('click', analyzeImage);
+    </script>
 </body>
 </html> 
