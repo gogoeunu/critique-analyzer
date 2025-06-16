@@ -16,7 +16,9 @@ const openai = new OpenAI({
 console.log('Environment check on startup:', {
     hasHuggingFaceKey: !!process.env.HUGGINGFACE_API_KEY,
     hasOpenAIKey: !!process.env.OPENAI_API_KEY,
-    envPath: path.join(__dirname, '.env')
+    envPath: path.join(__dirname, '.env'),
+    nodeEnv: process.env.NODE_ENV,
+    port: process.env.PORT
 });
 
 const app = express();
@@ -352,7 +354,9 @@ async function getReferences(critique, tags, language) {
     }
 }
 
+// Error handling for server startup
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-    console.log('Environment variables loaded:', { token: process.env.HUGGINGFACE_API_KEY ? 'Token exists' : 'No token found' });
+    console.log(`Server is running on port ${PORT}`);
+}).on('error', (err) => {
+    console.error('Server failed to start:', err);
 });
